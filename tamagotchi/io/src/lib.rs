@@ -8,12 +8,17 @@ pub type TransactionId = u64;
 pub struct ProgramMetadata;
 
 impl Metadata for ProgramMetadata {
-    type Init = ();
+    type Init = InOut<TmgInit, ()>;
     type Handle = InOut<TmgAction, TmgReply>;
     type Reply = ();
     type Others = ();
     type Signal = ();
     type State = Tamagotchi;
+}
+
+#[derive(Encode, Decode, TypeInfo, Debug)]
+pub enum TmgInit {
+    Name(String),
 }
 
 #[derive(Encode, Decode, TypeInfo, Debug)]
